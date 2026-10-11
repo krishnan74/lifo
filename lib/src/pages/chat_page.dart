@@ -10,32 +10,56 @@ class Chat_page extends StatefulWidget {
 }
 
 class _Chat_page extends State<Chat_page> with SingleTickerProviderStateMixin {
-  List<chatmodel> chats = [
-    chatmodel("Patrick", "assets/person.svg", false, "15:01",
-        "Who you callin' PINHEAD?"),
-    chatmodel("SpongeBob", "assets/person.svg", false, "16:32",
-        "I'm ready! I'm ready!"),
-    chatmodel("Squidward", "assets/person.svg", false, "18:49", "Whatever."),
-    
-  ];
   late TabController _controller;
+  late List<chatmodel> chats;
+  late List<Tab> chatTabs;
+
+  _Chat_page() {
+    // Initialize with an empty list for now, the actual data will be set in initState
+    chats = [];
+
+    // Initialize chatTabs with the actual data
+    chatTabs = <Tab>[
+      Tab(
+        child: ListView.builder(
+          itemCount: chats.length,
+          itemBuilder: (context, index) => chat1(
+            chat_model: chats[index],
+          ),
+        ),
+      ),
+      Tab(
+        text: 'Group tab',
+      ),
+    ];
+  }
+
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this, initialIndex: 0);
+
+    // Set the actual data for chats
+    chats = [
+      chatmodel("Patrick", "assets/person.svg", false, "15:01", "Who you callin' PINHEAD?"),
+      chatmodel("SpongeBob", "assets/person.svg", false, "16:32", "I'm ready! I'm ready!"),
+      chatmodel("Squidward", "assets/person.svg", false, "18:49", "Whatever."),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 61, 0, 86),
-          title: Text("Chat"),
-          actions: [
-            IconButton(icon: Icon(Icons.search), onPressed: () {}),
-            PopupMenuButton<String>(onSelected: (value) {
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 61, 0, 86),
+        title: Text("Chat"),
+        actions: [
+          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+          PopupMenuButton<String>(
+            onSelected: (value) {
               print(value);
-            }, itemBuilder: (BuildContext context) {
+            },
+            itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
                   child: Text("New Group"),
@@ -50,22 +74,29 @@ class _Chat_page extends State<Chat_page> with SingleTickerProviderStateMixin {
                   value: "Settings",
                 ),
               ];
-            })
-          ],
-          bottom: TabBar(controller: _controller, tabs: [
+            },
+          )
+        ],
+        bottom: TabBar(
+          controller: _controller,
+          tabs: [
             Tab(
               text: "CHATS",
             ),
             Tab(
               text: "GROUPS",
             )
-          ]),
+          ],
         ),
-        body: ListView.builder(
-          itemCount: chats.length,
-          itemBuilder: (context, index) => chat1(
-            chat_model: chats[index],
-          ),
-        ));
+      ),
+      body: TabBarView(
+        controller: _controller,
+        children: chatTabs.map((Tab tab) {
+          return Center(
+            child: tab,
+          );
+        }).toList(),
+      ),
+    );
   }
 }

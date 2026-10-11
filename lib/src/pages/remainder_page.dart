@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifo/src/customUI/assignment2.dart';
-import 'package:lifo/src/customUI/assignment3.dart';
-
-import '../customUI/assignment1.dart';
+import '../customUI/assignmentWidget.dart';
 
 class Remainder_page extends StatelessWidget {
   const Remainder_page({super.key});
@@ -10,18 +7,33 @@ class Remainder_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(25, 25, 25, 1),
+
       appBar: AppBar(
-        title: Text("Remainders"),
-        backgroundColor: Color.fromARGB(255, 61, 0, 86),
+        title: Text("Remainders",
+        ),
         actions: [
           IconButton(icon: Icon(Icons.add_task_rounded), onPressed: () {})
         ],
       ),
       body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         children: [
-          assignment1(),
-          assignment2(),
-          assignment3(),
+          assignmentWidget(
+            title: "Task1",
+            description: "Immediate task",
+            deadline: DateTime(2023, 07, 23),
+          ),
+          assignmentWidget(
+            title: "Task2",
+            description: "Immediate task",
+            deadline: DateTime(2023, 07, 23),
+          ),
+          assignmentWidget(
+            title: "Task1",
+            description: "Immediate task",
+            deadline: DateTime(2023, 07, 23),
+          ),
         ],
       ),
     );

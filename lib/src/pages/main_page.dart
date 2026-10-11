@@ -4,7 +4,7 @@ import 'package:lifo/src/helper/quad_cipper.dart';
 
 import 'package:lifo/src/pages/launcher_page.dart';
 import 'package:lifo/src/pages/chat_page.dart';
-import 'package:lifo/src/pages/chat_page.dart';
+import 'package:lifo/src/pages/Library_page.dart';
 import 'package:lifo/src/pages/feed_page.dart';
 import 'package:lifo/src/pages/profile_page.dart';
 import 'package:lifo/src/pages/remainder_page.dart';
@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   static List<Widget> _widgetOptions = <Widget>[
     Feed_page(),
     Search_page(),
-    Chat_page(),
+    Library_page(),
     Remainder_page(),
     Profile_page(),
   ];
@@ -42,15 +42,15 @@ class _MainPageState extends State<MainPage> {
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          selectedItemColor: Colors.purple,
+          selectedItemColor: Colors.deepPurple[400],
           unselectedItemColor: Colors.grey.shade300,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(5, 5, 5, 1),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: const Icon(Icons.home), label: ""),
             BottomNavigationBarItem(icon: const Icon(Icons.search), label: ""),
             BottomNavigationBarItem(
-                icon: const Icon(Icons.add_circle_outline), label: ""),
+                icon: const Icon(Icons.library_books_outlined), label: ""),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.notifications_active), label: ""),
             BottomNavigationBarItem(icon: const Icon(Icons.person), label: ""),

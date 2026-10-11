@@ -1,4 +1,3 @@
-import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/chatmodel.dart';
@@ -179,7 +178,7 @@ class _individualpageState extends State<individualpage> {
                             ),
                           ],
                         ),
-                        show ? emojiSelect() : Container(),
+                        Container(),
                       ],
                     )),
               ],
@@ -188,12 +187,4 @@ class _individualpageState extends State<individualpage> {
         ));
   }
 
-  Widget emojiSelect() {
-    return EmojiPicker(
-        rows: 4,
-        columns: 7,
-        onEmojiSelected: (emoji, category) {
-          print(emoji);
-        });
-  }
 }
